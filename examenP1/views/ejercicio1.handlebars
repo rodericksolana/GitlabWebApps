@@ -1,0 +1,29 @@
+<ul>
+	{{#each alumnoActual}}
+		{{! I'm in a new block...and the context has changed }}
+		<li>
+			<H1> Bienvenido: {{name}} </H2>
+				<H2> Materias</H>
+			{{#each materias}}
+
+			<h3> {{nombre}} - Calificación: {{calif}}</h3>
+			{{/each}}
+
+		</li>
+	{{/each}}
+</ul>
+
+{{#each partials.alumnos}}
+	<div>
+<H1>alumno {{name}}<H1>
+		<H2> Materias</H>
+	{{#each materias}}
+
+<h3>{{nombre}} - Calif: {{calif}}</h3>
+{{/each}}
+	</div>
+{{/each}}
+
+{{> weather}}
+
+<H1> <a href="/" > REGRESAR </a> </H1>
