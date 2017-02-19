@@ -12,44 +12,65 @@ h1 {
   color: red;
 
 }
+input[type=submit] {
+    width: 10em;  height: 2em;   font-size:24px;
+}
+
+input[type="text"]
+{
+    font-size:24px;
+}
 
 div {
-  font-size: 20px;
+
+  font-size: 70px;
   font-style: Palatino Linotype;
   color: red;
-  margin: 5px;
-  padding: 20px;
+  margin: 1px;
+  padding: 0px;
 }
-</style>
-</br>
 
+.formContainer {
+    margin: auto;
+    width: 60%;
+    border: 3px solid #73AD21;
+    padding: 10px;
+}
+
+</style>
+
+</br>
+<div>
 <div class="formContainer">
 	<form name="formula">
 		<div>
-			<label>Texto</label>
+			<center><label>Texto</label></center>
 			<div>
-				<input type="text" id="fieldName" name="name">
+				<center><input type="text" id="fieldName" name="name"></center>
 			</div>
 		</div>
 		<div>
-			<label>Clave</label>
+			<center><label>Clave</label></center>
 			<div>
-				<input type="text" required id="fieldName" name="email">
+				<center><input type="text" required id="fieldName" name="email"></center>
 			</div>
 		</div>
 		<div>
+      <center>
 			<div>
-				<input type="submit" value="Cifrar" onclick="sending(event, 1)">
+				<input type="submit" value="Cifrar" onclick="sending(event, true)">
 
-        <input type="submit"value="Decifrar" onclick="sending(event, -1)">
+        <input type="submit"value="Decifrar" onclick="sending(event, false)">
       </div>
+    </center>
 		</div>
 	</form>
 
-  Último Resultado: {{cifrado}}
-  <input type="text" value="{{cifrado}}"/>
+  	<div class="center"> <center>  Último Resultado: {{cifrado}} </center></div>
 
 </div>
+
+
 
 {{#section 'jquery'}}
 
@@ -67,11 +88,11 @@ div {
 					if(data.success){
             alert("Este es el resultado:"+ data.cifrado);
 
-						$('div.formContainer').html('<h2>La operaci&oacute;n fue exitosa. <a href="/vigenere">Regresa</a> para ver el último resultado y hacer otra prueba</h2>');
+						$('div.formContainer').html('<h1>La operaci&oacute;n fue exitosa. <a href="/vigenere">Regresa</a> para ver el último resultado y hacer otra prueba</h1>');
 
 					} else {
             console.log("ERROR");
-						$('div.formContainer').html('Hubo un error intenta de nuevo.');
+						$('div.formContainer').html('Hubo un error intenta de nuevo, no debe haber campos vacios.');
 					}
 				},
 				error: function(){

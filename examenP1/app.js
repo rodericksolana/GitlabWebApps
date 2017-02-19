@@ -25,70 +25,78 @@ app.use(require('body-parser')());
 
 if( app.thing == null ) console.log( 'bleat!' );
 
-function swearOutLoud(entrada,clave2, codigo) {
-/*
-	var alfabeto=">/*7�5u���?WR�jfsJIl�X@VrA=;Y� 3.P�e�D�n-LToNpC�!aOx+6�vt2d:)4%g��(�SHK<8EBhkbF,Z�cQ�19wzUMymGiq0�";
-	longalfa=alfabeto.length;
-	texto1=entrada;
-	texto2="";
-	clave=clave2;
-	longitud=texto1.length;
-	longclave=clave.length;
-	claveta=new Array(longclave);
-	for (m=0;m<longclave;m++) {
-			for (n=0;n<longalfa;n++) {
-			if (clave.substring(m,m+1)==alfabeto.substring(n,n+1)) {claveta[m]=n;break;}
-			}
-			}
-	for (i=0; i<longitud; i++) {
-			num1=32+Math.floor(Math.random()*95);
-			num2=32+Math.floor(Math.random()*95);
-			for (j=0; j<longalfa; j++) {
-				if (texto1.substring(i,i+1)==alfabeto.substring(j,j+1)) {num1=j;num2=claveta[i%longclave];break;}
-			}
-			numero=(num1+num2*codigo+longalfa)%longalfa;
-			texto2=texto2+alfabeto.substring(numero,numero+1);
-	}
-	cifrado=texto2;
-isPaused=true;
-	console.log("Esto vale al final: " + cifrado);
-	*/
+function VigenereAlgoritm(entrada,clave2, codigo) {
 
-	var alfabeto=">/*7�5u���?WR�jfsJIl�X@VrA=;Y� 3.P�e�D�n-LToNpC�!aOx+6�vt2d:)4%g��(�SHK<8EBhkbF,Z�cQ�19wzUMymGiq0�";
-	longalfa=alfabeto.length;
-	texto1=entrada;
-	texto2="";
-	clave=clave2;
-	longitud=texto1.length;
-	longclave=clave.length;
-	memo=new Array(longclave);
-	claveta=new Array(longclave);
-	for (m=0;m<longclave;m++) {
-			for (n=0;n<longalfa;n++) {
-			if (clave.substring(m,m+1)==alfabeto.substring(n,n+1)) {claveta[m]=n;break;}
-			}
-			}
-	for (i=0; i<longitud; i++) {
-			num1=32+Math.floor(Math.random()*95);
-			num2=32+Math.floor(Math.random()*95);
-			num3=32+Math.floor(Math.random()*95);
-			for (j=0; j<longalfa; j++) {
-				if (texto1.substring(i,i+1)==alfabeto.substring(j,j+1)) {num1=j;num2=claveta[i%longclave];break;}
-			}
-			numero=(num1+num2*codigo+longalfa)%longalfa;
-			if (codigo==1 && i>=longclave) {
-					for (j=0; j<longalfa; j++) if (memo[(i-longclave)%longclave]==alfabeto.substring(j,j+1)) {num3=j;break;}
-					numero=(numero+num3)%longalfa;
-					}
-			if (codigo==-1 && i>=longclave) {
-					for (j=0; j<longalfa; j++) if (texto1.substring(i-longclave,i-longclave+1)==alfabeto.substring(j,j+1)) {num3=j;break;}
-					numero=(numero-num3+longalfa)%longalfa;
-					}
-			texto2=texto2+alfabeto.substring(numero,numero+1);
-			memo[i%longclave]=alfabeto.substring(numero,numero+1);
-	}
-	cifrado=texto2;
-	isPaused=true;
+    function doCrypt(isDecrypt) {
+    	if (clave2.length == 0) {
+    		return 0;
+    	}
+    	var key = filterKey(clave2);
+    	if (key.length == 0) {
+    		return 0;
+    	}
+    	if (isDecrypt) {
+    		for (var i = 0; i < key.length; i++)
+    			key[i] = (26 - key[i]) % 26;
+    	}
+
+    	cifrado = crypt(entrada, key);
+
+      isPaused=true;
+
+    }
+
+
+    /*
+     * Returns the result the Vigenère encryption on the given text with the given key.
+     */
+    function crypt(input, key) {
+    	var output = "";
+    	for (var i = 0, j = 0; i < input.length; i++) {
+    		var c = input.charCodeAt(i);
+    		if (isUppercase(c)) {
+    			output += String.fromCharCode((c - 65 + key[j % key.length]) % 26 + 65);
+    			j++;
+    		} else if (isLowercase(c)) {
+    			output += String.fromCharCode((c - 97 + key[j % key.length]) % 26 + 97);
+    			j++;
+    		} else {
+    			output += input.charAt(i);
+    		}
+    	}
+    	return output;
+    }
+
+    function filterKey(key) {
+    	var result = [];
+    	for (var i = 0; i < key.length; i++) {
+    		var c = key.charCodeAt(i);
+    		if (isLetter(c))
+    			result.push((c - 65) % 32);
+    	}
+    	return result;
+    }
+
+
+    // Tests whether the specified character code is a letter.
+    function isLetter(c) {
+    	return isUppercase(c) || isLowercase(c);
+    }
+
+    // Tests whether the specified character code is an uppercase letter.
+    function isUppercase(c) {
+    	return c >= 65 && c <= 90;  // 65 is the character code for 'A'. 90 is for 'Z'.
+    }
+
+    // Tests whether the specified character code is a lowercase letter.
+    function isLowercase(c) {
+    	return c >= 97 && c <= 122;  // 97 is the character code for 'a'. 122 is for 'z'.
+    }
+
+    if(codigo == "true")
+    doCrypt(true);
+    else
+    doCrypt(false);
 
 };
 
@@ -111,7 +119,7 @@ app.get('/vigenere',function(req,res){
 
 	app.post('/process', function(req, res){
 
-swearOutLoud(req.body.name , req.body.email,  req.body.tipo );
+VigenereAlgoritm(req.body.name , req.body.email,  req.body.tipo );
 /*
 		console.log('Name (from visible form field): ' + req.body.name);
 		console.log('Email (from visible form field): ' + req.body.email);
@@ -121,6 +129,10 @@ swearOutLoud(req.body.name , req.body.email,  req.body.tipo );
 
 if(isPaused)
 		res.send({ success: true, cifrado: cifrado });
+    else {
+      res.send({ success: false, cifrado: cifrado });
+
+    }
 	//	cifrado=5;
 	//	res.redirect(303, '/vigenere');
 
