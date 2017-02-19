@@ -30,6 +30,12 @@ app.use(require('body-parser')());
 
 if (app.thing == null) console.log('bleat!');
 
+app.use(function(req, res, next){
+	res.locals.showTests = app.get('env') !== 'production' && req.query.test === '1';
+	next();
+});
+
+
 function VigenereAlgoritm(entrada, clave2, codigo) {
 
 	function doCrypt(isDecrypt) {
@@ -136,28 +142,25 @@ function cesar(cadena, desplazamiento, cifrar) {
 
 app.get('/', function (req, res) {
 	res.render('home', {
+  pageTestScript: '/qa/tests-home.js'
+    });
+  });
 
+app.get('/vigenere',function(req,res){
+	res.render('vigenere',{
+		 cifrado : cifrado,
+     pageTestScript: '/qa/tests-vigenere.js'
+	  } );
+  } );
 
-	});
-
-});
-
-app.get('/vigenere', function (req, res) {
-	res.render('vigenere', {
-		cifrado: cifrado
-	});
-
-});
-
-app.post('/process', function (req, res) {
-
+  app.post('/process', function(req, res){
+    
 	VigenereAlgoritm(req.body.name, req.body.email, req.body.tipo);
 	/*
 			console.log('Name (from visible form field): ' + req.body.name);
 			console.log('Email (from visible form field): ' + req.body.email);
 			console.log('Email (from visible form field): ' + req.body.tipo);
 	*/
-
 
 	if (isPaused)
 		res.send({ success: true, cifrado: cifrado });

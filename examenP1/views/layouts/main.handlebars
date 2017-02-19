@@ -1,7 +1,6 @@
 <!doctype html>
 <html>
 <head>
-
 <style>
 nav ul {
     list-style-type: none;
@@ -29,8 +28,7 @@ nav li a:hover {
     background-color: #111;
 }
 
-footer {
-	 position: absolute;
+.footer {
    right: 0;
    bottom: 0;
    left: 0;
@@ -41,8 +39,8 @@ footer {
 	 font-size: 50px;
 
 }
-
 </style>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 <meta http-equiv="Content-Language" content="es">
@@ -54,20 +52,15 @@ footer {
 	<title>Parcial 1</title>
 
 
-
-	{{#if showTests}}
-		<link rel="stylesheet" href="/vendor/mocha.css">
-	{{/if}}
-	<script src="//code.jquery.com/jquery-2.0.2.min.js"></script>
+  	{{#if showTests}}
+  		<link rel="stylesheet" href="/vendor/mocha.css">
+  	{{/if}}
+  	<script src="//code.jquery.com/jquery-2.0.2.min.js"></script>
 
 </head>
 
 
 <body>
-<!--
-	<header><img src="/img/logo.jpg" alt="Meadowlark Travel Logo"></header>
--->
-
 
 
 <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -101,9 +94,9 @@ footer {
 	{{/if}}
 
 
-	<footer>
-    	P&aacute;gina desarrollada por Rodrigo Solana Chao - Miguel del Moral  :ITESM:
-    </footer>
+	<div class="footer">
+	P&aacute;gina desarrollada por Rodrigo Solana Chao - Miguel del Moral  :ITESM:
+</div>
 
 </body>
 </html>
