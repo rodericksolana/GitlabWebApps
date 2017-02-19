@@ -23,6 +23,12 @@ app.set('port', process.env.PORT || 3000);
 app.use(express.static(__dirname + '/public'));
 app.use(require('body-parser')());
 
+app.use(function(req, res, next){
+	res.locals.showTests = app.get('env') !== 'production' && req.query.test === '1';
+	next();
+});
+
+
 if( app.thing == null ) console.log( 'bleat!' );
 
 function VigenereAlgoritm(entrada,clave2, codigo) {
@@ -104,15 +110,15 @@ function VigenereAlgoritm(entrada,clave2, codigo) {
 
 app.get('/',function(req,res){
 	res.render('home',{
-
-
+	pageTestScript: '/qa/tests-home.js'
 	});
 
 });
 
 app.get('/vigenere',function(req,res){
 	res.render('vigenere',{
-		 cifrado : cifrado
+		 cifrado : cifrado,
+     pageTestScript: '/qa/tests-vigenere.js'
 	} );
 
 	});
