@@ -1,0 +1,66 @@
+<style>
+body {
+    background-color: Black ;
+
+}
+h1 {
+  margin: 5px;
+  padding: 5px;
+  font-size: 30px;
+  font-style: Palatino Linotype;
+  color: red;
+
+}
+input[type=submit] {
+    width: 10em;  height: 2em;   font-size:24px;
+}
+
+input[type="text"], input[type="number"]
+{
+    font-size:24px;
+}
+
+div {
+
+  font-size: 70px;
+  font-style: Palatino Linotype;
+  color: red;
+  margin: 1px;
+  padding: 0px;
+}
+
+.formContainer {
+    margin: auto;
+    width: 60%;
+    border: 3px solid #73AD21;
+    padding: 10px;
+}
+
+</style>
+
+
+<div class="formContainer">
+    <form name="formula" action="/cesar" method="POST">
+        <div>
+            <center><label>Texto</label></center>
+            <div>
+                <center><input type="text" id="fieldName" name="texto"></center>
+            </div>
+        </div>
+        <div>
+            <center><label>Desplazamiento</label></center>
+            <div>
+                <center><input type="number" id="fieldName" name="desplazamiento"></center>
+            </div>
+        </div>
+        <div>
+            <center>
+                <div>
+                    <input type="submit" name="modo" value="cifrar">
+
+                    <input type="submit" name="modo" value="decifrar">
+                </div>
+            </center>
+        </div>
+    </form>
+</div>
