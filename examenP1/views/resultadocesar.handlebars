@@ -1,0 +1,81 @@
+<style>
+    body {
+        background-color: Black;
+    }
+    
+    h1 {
+        margin: 5px;
+        padding: 5px;
+        font-size: 30px;
+        font-style: Palatino Linotype;
+        color: red;
+    }
+    
+    p {        
+        font-size: 25px;
+        font-style: Palatino Linotype;
+        color: white;
+    }
+
+    input[type=submit] {
+        width: 10em;
+        height: 2em;
+        font-size: 24px;
+    }
+    
+    input[type="text"],
+    input[type="number"] {
+        font-size: 24px;
+    }
+    
+    div {
+        font-size: 70px;
+        font-style: Palatino Linotype;
+        color: red;
+        margin: 1px;
+        padding: 0px;
+    }
+    
+    .formContainer {
+        margin: auto;
+        width: 60%;
+        border: 3px solid #73AD21;
+        padding: 10px;
+    }
+</style>
+
+<div class="formContainer">
+    <form name="formula" action="/cesar" method="POST">
+        <div>
+            <center><label>Texto</label></center>
+            <center>
+                <p>{{{texto}}}</p>
+            </center>
+        </div>
+        <div>
+            <center><label>Desplazamiento</label></center>
+            <center>
+                <p>{{{cifrado}}}</p>
+            </center>
+        </div>
+        <div>
+            <center>
+                <a href="/cesar">Regresar</a>
+            </center>
+        </div>
+    </form>
+    {{!--<form name="formula" action="/cesar" method="POST">
+        <div>
+            <label>Texto Original</label>
+            <p>{{{texto}}}</p>
+        </div>
+        <div>
+            <label>Resultado</label>
+            <p>{{{cifrado}}}</p>
+        </div>
+        <div>
+            <a href="/cesar">Regresar</a>
+        </div>
+    </form>--}}
+
+</div>
