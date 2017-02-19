@@ -175,7 +175,8 @@ app.get('/vigenere',function(req,res){
 
 app.get('/cesar', function (req, res) {
 	res.render('cesar', {
-		cifrado: cifrado
+		cifrado: cifrado,
+		pageTestScript: '/qa/tests-cesar.js'
 	});
 
 });
