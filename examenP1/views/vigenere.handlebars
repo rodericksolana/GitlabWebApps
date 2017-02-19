@@ -1,0 +1,85 @@
+
+<style>
+body {
+    background-color: Black ;
+
+}
+h1 {
+  margin: 5px;
+  padding: 5px;
+  font-size: 30px;
+  font-style: Palatino Linotype;
+  color: red;
+
+}
+
+div {
+  font-size: 20px;
+  font-style: Palatino Linotype;
+  color: red;
+  margin: 5px;
+  padding: 20px;
+}
+</style>
+</br>
+
+<div class="formContainer">
+	<form name="formula">
+		<div>
+			<label>Texto</label>
+			<div>
+				<input type="text" id="fieldName" name="name">
+			</div>
+		</div>
+		<div>
+			<label>Clave</label>
+			<div>
+				<input type="text" required id="fieldName" name="email">
+			</div>
+		</div>
+		<div>
+			<div>
+				<input type="submit" value="Cifrar" onclick="sending(event, 1)">
+
+        <input type="submit"value="Decifrar" onclick="sending(event, -1)">
+      </div>
+		</div>
+	</form>
+
+  Último Resultado: {{cifrado}}
+  <input type="text" value="{{cifrado}}"/>
+
+</div>
+
+{{#section 'jquery'}}
+
+<script>
+	function sending(evt, numero){
+			evt.preventDefault();
+			var action = "/process";
+
+			$.ajax({
+				type: 'POST',
+				url: action,
+         data: { name: formula.name.value, email : formula.email.value, tipo: numero} ,
+				dataType: 'json',
+				success: function(data){
+					if(data.success){
+            alert("Este es el resultado:"+ data.cifrado);
+
+						$('div.formContainer').html('<h2>La operaci&oacute;n fue exitosa. <a href="/vigenere">Regresa</a> para ver el último resultado y hacer otra prueba</h2>');
+
+					} else {
+            console.log("ERROR");
+						$('div.formContainer').html('Hubo un error intenta de nuevo.');
+					}
+				},
+				error: function(){
+					console.log("ERROR");
+					$('div.formContainer').html('Hubo un error intenta de nuevo.');
+				}
+			});
+	}
+</script>
+
+{{/section}}

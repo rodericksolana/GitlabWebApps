@@ -1,20 +1,3 @@
-<!--
-
-<!doctype html>
-<html>
-<head>
-	<title>P1</title>
-	{{{_sections.head}}}
-</head>
-<body>
-	<h1>Examen P1</h1>
-	{{{body}}}
-	{{{_sections.jquery}}}
-</body>
-</html>
-
--->
-
 <!doctype html>
 <html>
 <head>
@@ -60,12 +43,15 @@ footer {
 }
 
 </style>
-
-<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="es">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Meadowlark Travel</title>
+
+	<title>Parcial 1</title>
 
 
 
@@ -82,16 +68,23 @@ footer {
 	<header><img src="/img/logo.jpg" alt="Meadowlark Travel Logo"></header>
 -->
 
+
+
+<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script>window.jQuery || document.write('<script src="/vendor/js/jquery-2.1.1.min.js"><\/script>')</script>
+
 <nav>
 <ul>
   <li><a href="/">P&aacute;gina Principal.</a></li>
   <li><a href="/about">Cifrado Cesar.</a></li>
-  <li><a href="/giras">Cifrado Vigen&eacute;re.</a></li>
+  <li><a href="/vigenere">Cifrado Vigen&eacute;re.</a></li>
 </ul>
 </nav>
 
+	{{{_sections.jquery}}}
 
 	{{{body}}}
+
 	{{#if showTests}}
 		<div id="mocha"></div>
 		<script src="/vendor/mocha.js"></script>
